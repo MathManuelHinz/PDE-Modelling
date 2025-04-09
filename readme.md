@@ -1,0 +1,2 @@
+A few comments:
+- \makesavenoteenv{tcolorbox} might cause your compilation to fail, if your LaTeX installation is out of date! You can safely comment that line out, although the footnotes will be worse (confined to the colorboxes, instead of the pages)
