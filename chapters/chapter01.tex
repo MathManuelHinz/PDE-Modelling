@@ -1,0 +1,157 @@
+\chapter{General principles}
+
+\section{Kinematics}\marginnote{This somehow creates  playing field}
+
+\subsection{Deformations}
+
+Let \(\Omega\subset\R^n\) be a \dhighlight{domain} \marginnote{Open, connected set}.
+
+\begin{definition}\label{def:1.1}
+    A \(C^k\) (\(k\geq 1\)) deformation of a domain \(\Omega\subset\R^n\) is a map \(\varphi:\Omega\to\R^n\) with:
+    \begin{enumerate}
+        \item \(\varphi\in C^k(\Omega,\R^n)\) 
+        \item \(\varphi\) has a continuous extension to \(\overline{\Omega}\) and the extension is invertible
+        \item \(\varphi\) is \dhighlight{orientation preserving}: \(\det D\varphi>0\) in \(\Omega\).
+    \end{enumerate}
+    \(\Omega\) is often called the \dhighlight{reference configuration} of the body and \(\varphi(\Omega)\) is often called 
+    the \dhighlight{deformed configuration} (position in physical space).
+\end{definition}
+
+\subsubsection*{Some linear algebra}%TODO
+
+Simplest example: \(\varphi(x)=Ax+b\) with \(b\in \R^n, A:\R^n\to\R^n\) linear with \(\det A>0\).
+We often identify linear maps with the corresponding matrix with respect to the standard basis of \(\R^n\).
+\[Ae_j=\sum_{i=1}^nA_{ij}e_i\]
+We also usually use the standard scalar product on \(\R^n\)
+\[x\cdot y=\sum_{i=1}^n x_iy_i\]
+
+Transpose is defined by 
+\[A^\intercal x\cdot y=x\cdot A y\]
+for all \(x,y\in\R^n\).
+
+\(A\) is symmetric if \(A^\intercal =A\). A symmetric matrix \(A\) is positive semi-definite if 
+\[Ax\cdot x\geq 0\]
+and positive definite if 
+\[Ax\cdot x> 0.\]
+
+\begin{definition}\label{def:1.2}
+    \[O(n)=\{A:A^\intercal A=\Id\}\]
+    \[\SO(n)=\{A:A^\intercal A=\Id, \det A=1\}\]
+\end{definition}
+
+Some basic facts: 
+\begin{itemize}
+    \item \(A\) isometry: \(|Ax|^2=|x|^2\forall x\in \R^n\) which holds \(\iff A\in O(n)\)
+    \item \(A\in O(n)\implies \det A = \pm 1\)
+\end{itemize}
+
+Norms on matrices:
+\begin{itemize}
+    \item \dhighlight{Euclidean norm (Hilbert Schmidt norm)}: \(|A|^2=\text{tr}(A^\intercal A)=\sum_{i,j=1}^n A_{ij}^2, A\cdot B=\text{tr}A^\intercal B\)
+    \item \dhighlight{Operator norm} \(\Vert A \Vert = \supp_{x\neq 0} \frac{|Ax|}{|x|}=\sup_{|x|=1}|Ax|\implies \Vert AB\Vert \leq \Vert A\Vert\Vert B\Vert \)
+\end{itemize}
+
+\begin{lemma}[Polar decomposition]\label{lem:1.3}
+    Let \(A:\R^n\to\R^n\) linear, \(\det A>0\).
+    \begin{enumerate}
+        \item There exists a unique pair \((R,U)\) with \(R\in \SO(n), U\) symmetric s.t. \[A=RU\]
+        \item there exists a unique pair \((R',V)\) with \(R'\in \SO(n), U\) symmetric s.t. \[A=VR'\]
+    \end{enumerate}
+    If \(\det A=0\) this is still possible, but we lose uniqueness.
+\end{lemma}
+
+\begin{theorem}\label{thm:1.4}
+    Let \(W\) be symmetric and positive semi-definite. 
+    Then there exists a unique symmetric and positive semi-definite matrix \(U\), such that \[W=U^2.\] 
+\end{theorem}
+\dhighlight{Notation:} \(U=\sqrt{W},U=W^{\frac{1}{2}}\).
+
+\begin{proof}
+    Just existence(not uniqueness).
+
+    Let \(D=\text{diag}(d_i),d_i\geq 0\), then \(D^{\frac{1}{2}}=\text{diag}(\sqrt{d_i})\).
+    For \(W\) symmetric positive definite, we get \[W=Q^\intercal D Q, Q\in \SO(n)\]
+    Then \(U=Q^\intercal D^{\frac{1}{2}}Q\) is the square root: \[U^2=Q^\intercal D \underbrace{QQ^\intercal}_{=\Id}\] 
+\end{proof}
+
+\begin{proof}[Proof of \ref{lem:1.3}]
+    For (ii) apply (i) to \(A^\intercal\).
+
+    For (i): Assume we already knew that there are \((R,u)\) s.t. \[A=RU.\]
+    Then \begin{align*}
+        A^\intercal & = U^\intercal R^\intercal = UR^\intercal \\
+        A^\intercal &A = U \underbrace{R^\intercal R}_{=\Id} U = U^2\\
+        (A^\intercal A)^\intercal&=A^\intercal A \\
+        (A^\intercal A x\cdot x &= (Ax\cdot A x)\geq 0)\\
+        &\implies U=(A^\intercal A)^\frac{1}{2}
+    \end{align*}
+
+    If such a decomposition exists, \(U\) is unique by the formula.
+
+    For existence define \(U=(A^\intercal A)^\frac{1}{2}\) and \(R\coloneqq AU^{-1}\). We have to 
+    check that \(R\in \SO(n)\):
+    \begin{align*}
+        R^\intercal R &=(U^{-1})^\intercal A^\intercal A U^{-1}=\Id\\
+        \det R &=\det A \det (U^{-1})>0\implies R\in \SO(n).
+    \end{align*}
+\end{proof}
+
+\begin{lemma}\label{lem:1.5}
+    \(A\in \R^{n\times n}\). Then there exists \(R,Q\in \SO(n)\) and \(\lambda_1\in \R,\lambda_2,\dots,\lambda_n\geq 0\) s.t. \(|\lambda_1|\leq \lambda_2\leq \dots \leq \lambda_n\):
+    \[A=R\begin{bmatrix}
+        \lambda_1 &&\\
+        &\ddots & \\
+        &&\lambda_n
+    \end{bmatrix} Q.\]
+    The \(\lambda_1,\dots,\lambda_n\) are uniquely determined by \(A\). The \(\lambda_i\) are called 
+    the singular values of \(A\).
+\end{lemma}
+
+\begin{proof}
+    If \(\det A>0\stackrel{\implies}{\text{Polar decomp.}} A=RU=\underbrace{R'Q^\intercal}_{R\in \SO(n)} D Q\).
+
+    If \(\det A<0\) consider \(P=\begin{bmatrix}
+        -1 & &&\\
+        & 1 &&\\
+        &&\ddots&\\
+        &&&1
+    \end{bmatrix}\implies \det(AP)>0\).
+
+    The \(\vert A^\intercal A\vert\) are the eigenvalues of \((A^\intercal A)^\frac{1}{2}\).
+
+\end{proof}
+
+We know \(|A|=(\sum_{i=1}^n \lambda_i^2)^\frac{1}{2},\Vert A \Vert = \lambda_n\) and 
+\[\det A=\prod_{i=1}^n \lambda_i\]
+
+\subsubsection*{Rigid motion}
+
+
+\begin{definition}\label{def:1.6}
+    A deformation \(\varphi:\Omega\to \R^n\) is called a \dhighlight{rigid deformation} if \(D\varphi(x)\in \text{SO}(n)\forall x\in \Omega\).
+\end{definition}
+
+\begin{theorem}[Liouville]\label{thm:1.7}
+    Suppose \(\varphi:\Omega\to\R^n\) is \(C^1\), \(\Omega\) is a domain and \(\det D\varphi\). Then the following three statements are equivalent:
+    \begin{enumerate}
+        \item \(D\varphi(x)\in\text{SO}(n)\forall x\in \Omega\) (Rigid motion)
+        \item \(\varphi\) is an \dhighlight{affine} rigid motion: \[\varphi(x)=Ax+b, A\in \text{SO}(n),b\in \R^n\]
+        \item \(|\varphi(x)-\varphi(y)|=|x.y|\forall x,y\in \R^n\)
+    \end{enumerate} 
+\end{theorem}
+
+\begin{proof}
+    Ideas (rest is homework):
+
+    \begin{itemize}
+        \item (ii) \(\implies\) (iii) is clear (since we assume the determinant to be $>0$)
+        \item (iii) \(\implies\) (ii): nice ex. (true in hilbert spaces). \(\varphi((1-\lambda)x+\lambda y)=(1-\lambda)\varphi(x)+\lambda\varphi(y)\) By using that spheres are mapped to spheres (and two of those intersect in a single point)
+        \item (ii) \(\implies\) (i): trivial
+        \item (i) \(\implies\) (ii): goes via local version of (iii). Claim: for all \(x_0\in\Omega\exists r>0, B_r(x_0)\subset \Omega\) and \(|\varphi(x)-\varphi(y)|\leq |x-y|\forall x,y\in B_(0)\)
+        \item \(\geq \)Use inverse function theorem 
+    \end{itemize}
+\end{proof}
+
+This can be generalized to Sobolev spaces.
+
+\markeol{01}
