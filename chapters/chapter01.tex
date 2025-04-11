@@ -168,7 +168,7 @@ Sheet 02: out on Wednesday April 16th due on April 23rd
 
 \begin{figure}[H]\label{fig:1.01}
     \centering
-    \includegraphics[width=.7\textwidth]{example-image}
+    \includegraphics[width=.7\textwidth]{fig_1_01.png}
     \caption{Sketch 1.01}
 \end{figure}
 
@@ -241,7 +241,7 @@ Now \(B:\R^{n-1}\to\R^n\) linear, \(E\subset\R^{n-1}\)
 
 \begin{figure}[H]\label{fig:1.02}
     \centering
-    \includegraphics[width=.7\textwidth]{example-image}
+    \includegraphics[width=.7\textwidth]{fig_1_02.png}
     \caption{Sketch 1.02}
 \end{figure}
 
@@ -259,13 +259,19 @@ Exercise. Hints:
 \begin{theorem}\label{thm:1.11}
     Let \(\Omega\in\R^n\) be a domain, \(\varphi:\Omega\to\R^n\) a \(C^1\) deformation. Then 
     \begin{enumerate}
-        \item For all measureable \(U\subset\Omega\) and forall \(g\in L^1(\varphi(U))\). 
+        \item For all measurable \(U\subset\Omega\) and for all \(g\in L^1(\varphi(U))\). 
         \[\int_{\varphi}(U)g(x)dx\int_U g(\varphi(X))=\det D\varphi(X)dX\]
         \item For all bounded sets \(U\subset \Omega\) with a \(C^1\) boundary and \(\bar{U}\subset \Omega\) and all \(g\in L^1(\varphi(\partial U))\)
             \[\int_{\partial \varphi(U)}g(x)d\mathcal{H}^{n-1}(x)=\int_{\partial U} g(\varphi(X))|\cof D\varphi(X)\nu(X)|d\mathcal{H}^{n-1}(X)\]
             \[\int_{\partial \varphi(U)}g(x)\underbrace{\mu(x)d\cH^{n-1}(x)}_{\text{oriented area}}=\int_{\partial U}g(\varphi(X))\cof D\varphi(X)\nu(X)d\mathcal{H}^{n-1}(x)\]
     \end{enumerate}
 \end{theorem}
+
+\begin{figure}[H]\label{fig:1.03}
+    \centering
+    \includegraphics[width=.7\textwidth]{fig_1_03.png}
+    \caption{Sketch 1.03}
+\end{figure}
 
 \begin{proof}
     (i) Analysis 3 (ii) using charts and partition of unity.
@@ -277,7 +283,7 @@ Exercise. Hints:
 
 \begin{figure}[H]\label{fig:1.04}
     \centering
-    \includegraphics[width=.7\textwidth]{example-image}
+    \includegraphics[width=.7\textwidth]{fig_1_04.png}
     \caption{Sketch 1.04}
 \end{figure}
 where \(v(t,x)\) is the \dhighlight{velocity} at spacial point \(x\) and time \(t\).
@@ -337,7 +343,7 @@ are the velocity and the acceleration.
 Define \(g_m(t,X)=g(t,\varphi_t(X))=g(t,\varphi(t,X))\).
 \begin{align*}
     \dot{g}(t_0,x_0)=? & X_0=\Phi_t(x_0), x_0=\varphi_t(X_0)\\
-    \frac{\partial}{\partial t} g_m(t_0,X_0) & = \frac{\partial g}{\partial t}(t_0,\varphi_{t_0}(X_0))+\sum_{i=1}^n\frac{\partial g}{\partial x_}(t_0,\varphi_t(X_0))\frac{\partial \varphi_i}{\partial t}(t_0,X_0) \\
+    \frac{\partial}{\partial t} g_m(t_0,X_0) & = \frac{\partial g}{\partial t}(t_0,\varphi_{t_0}(X_0))+\sum_{i=1}^n\frac{\partial g}{\partial x_i}(t_0,\varphi_t(X_0))\frac{\partial \varphi_i}{\partial t}(t_0,X_0) \\
     \dot{g}(t_0,x_0)&=\left(\frac{\partial}{\partial t}g_m\right)(t_0,\Phi_t(x_0))(v_s)_{i}(t_0,x_0)\\
     \dot{g}(t_0,x_0)&= \frac{\partial g}{\partial t}(t_0,x_0)+\sum_{i}\frac{\partial g}{\partial x_i}(t_0,x_0)v_s(t_0,x_0)
 \end{align*}
@@ -356,11 +362,6 @@ is the acceleration and \(v\cdot \nabla v\) is the only non-linearity in Navier-
     \(t\mapsto \mathcal{L}^n(U_t)\) is constant, where \(U_t=\varphi_t(U)\). 
 \end{definition}
 
-\begin{figure}[H]\label{fig:1.05}
-    \centering
-    \includegraphics[width=.7\textwidth]{example-image}
-    \caption{Sketch 1.05}
-\end{figure}
 
 Spoiler: we need \(t\mapsto \det D\varphi_t(x)\) is constant.
 
